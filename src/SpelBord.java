@@ -3,6 +3,7 @@ public class SpelBord {
 	private int AANTAL_RIJEN = 0;
 	private Schijf[][] array;
 	private boolean gameOver = false;
+	private int[][] directions={{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
 
 	/**
 	 * Constructor voor het spelbord aantal rijen = aantal kolommen - 1
@@ -108,7 +109,7 @@ public class SpelBord {
 	 */
 	public boolean zetSchijf(int kolom, Speler speler) {
 		kolom = kolom - 1;
-		if(this.isJuisteZet(kolom)){
+		if((kolom>=0)&&(kolom<this.AANTAL_KOLOMMEN)&&(this.isJuisteZet(kolom))){
 			int rij = this.firstEmptyRow(kolom);
 			this.array[rij][kolom] = speler.getSymbol();
 			return true;
@@ -116,6 +117,11 @@ public class SpelBord {
 			return false;
 		}
 	}
+	
+	
+	
+	
+	
 	/**
 	 * print de namen, het symbool en het resterende aantal aambeelden van de spelers
 	 * @param speler1
