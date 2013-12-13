@@ -14,8 +14,12 @@ public class Mens extends Speler{
 	}
 	
 	public void vraagVoorZet(){
-		System.out.println("In welke kolom wilt u een schijf plaatsen?");	
-		int kolom = s.nextInt();
-		this.bord.zetSchijf(kolom, this);
+		boolean succesvol = false;
+		do{
+			System.out.println("In welke kolom wilt u een schijf plaatsen?");	
+			int kolom = s.nextInt();
+			succesvol = this.bord.zetSchijf(kolom, this);
+		}while (succesvol!=true);
+		
 	}
 }

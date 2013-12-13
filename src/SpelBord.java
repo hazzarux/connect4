@@ -79,9 +79,12 @@ public class SpelBord {
 	 * @param kolom
 	 * @return true als de speler een juiste zet doet
 	 */
-	public boolean juisteZet(int kolom) {
-		// TODO check of de kolom vol is
-		return true;
+	public boolean isJuisteZet(int kolom) {
+		if((this.firstEmptyRow(kolom)<=AANTAL_RIJEN)&&(this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
@@ -97,11 +100,21 @@ public class SpelBord {
 		}
 		return 1;
 	}
-
-	public void zetSchijf(int kolom, Speler speler) {
+	/**
+	 * 
+	 * @param kolom
+	 * @param speler
+	 * @return true als schijf geplaatst is
+	 */
+	public boolean zetSchijf(int kolom, Speler speler) {
 		kolom = kolom - 1;
-		int rij = this.firstEmptyRow(kolom);
-		this.array[rij][kolom] = speler.getSymbol();
+		if(this.isJuisteZet(kolom)){
+			int rij = this.firstEmptyRow(kolom);
+			this.array[rij][kolom] = speler.getSymbol();
+			return true;
+		}else{
+			return false;
+		}
 	}
 	/**
 	 * print de namen, het symbool en het resterende aantal aambeelden van de spelers

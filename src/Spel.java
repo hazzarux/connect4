@@ -19,8 +19,6 @@ public class Spel {
 				"                             |_|                            |__/ ";
 		System.out.println(welcomeMessage);
 		
-		
-		
 		boolean playAnotherGame = false;
 		
 		// TODO: playanothergame implementeren
