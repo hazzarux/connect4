@@ -45,13 +45,16 @@ public class Spel {
 
 		// bord genereren
 		SpelBord bord = new SpelBord(grootteSpelBord);
-		bord.printSpelbord();
+		//bord.printSpelbord();
 
 		// spelers genereren (computerspeler met bepaalde moeilijkheidsgraad)
 		Mens human = new Mens(aantalAambeelden, bord, naam);
 		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord);
 
 		do {
+			bord.generateSpelbord();
+			bord.setGameOver(false);
+			bord.printSpelbord();
 			while (bord.isGameOver() == false) {
 				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
@@ -94,7 +97,7 @@ public class Spel {
 	 */
 	public static boolean promptIfPlayerWantsToPlayAgain() {
 		System.out.println("Wilt u opnieuw spelen? (j/n)");
-		String yesOrNo = s.nextLine();
+		String yesOrNo = s.next();
 		yesOrNo = yesOrNo.toLowerCase();
 
 		if (yesOrNo.equals("j")) {
