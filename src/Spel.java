@@ -58,9 +58,9 @@ public class Spel {
 			bord.setGameOver(false);
 			bord.printSpelbord();
 			while (bord.isGameOver() == false) {
+				printAlles(bord, human, ai);
 				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
-					printAlles(bord, human, ai);
 					
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
@@ -76,7 +76,6 @@ public class Spel {
 					}
 				} else {
 					ai.doeZet();
-					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
@@ -124,7 +123,6 @@ public class Spel {
 	}
 	
 	public static void checkForWinner(Schijf winnendeSchijf, Speler speler1, Speler speler2, SpelBord bord){
-		Leeg leeg = new Leeg();
 		if(winnendeSchijf.getCharacter().equals(speler1.getSymbol().toString())){
 			speler1.incrementScore();
 			System.out.println(speler1.getNaam()+" heeft gewonnen! Zijn/haar score is nu "+speler1.getScore()+"!");

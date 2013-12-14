@@ -15,7 +15,7 @@ public class Mens extends Speler {
 	public void vraagVoorZet() {
 		boolean succesvol = false;
 		do {
-			System.out.println("In welke kolom wilt u een schijf plaatsen?");
+			System.out.println("In welke kolom wilt u een schijf plaatsen? (0 - "+this.bord.getAantalKolommen()+")");
 			int kolom = s.nextInt();
 			succesvol = this.bord.zetSchijf(kolom, this);
 		} while (succesvol != true);

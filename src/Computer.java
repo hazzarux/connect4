@@ -15,33 +15,37 @@ public class Computer extends Speler {
 		super.setNaam(this.naam);
 	}
 
-	
-	//TODO implement doezetnormaal
+	//TODO implement doe zet normaal
 	public void doeZetNormaal(){
-		Leeg leeg = new Leeg();
-		Speler lege = new Speler();
-		int teZettenKolom=0;
-		lege.setSymbol(leeg);
-		for(int i = 0;i<this.bord.getAantalKolommen();i++){
-			
-			if(this.bord.check4()==this.symbool){
-				teZettenKolom=i;
-			}else{
-				
+		
+		/*SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
+		
+		bord2.setArray(this.bord.getArray());
+		int result=-1;
+		for(int i = 0;i<bord2.getAantalKolommen();i++){
+			Schijf x = bord2.getSchijf(i);
+			bord2.zetSchijf(i, this);
+			if(bord2.check4()==this.symbool){
+				result=i;
 			}
-			this.bord.zetSchijf(i, lege);
+			if(x.getCharacter())
+			bord2.zetSchijf(i, x);
 		}
 		
-		this.bord.zetSchijf(teZettenKolom, this);
+		if(result!=-1){
+			this.bord.zetSchijf(result, this);
+		}else{
+			this.doeZetMakkelijk();
+		}*/
 	}
 	
 	public void doeZetMakkelijk() {
 		Random randomGenerator = new Random();
-		int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen());
-		if(randomInt==0){
-			randomInt=randomInt+1;
+		int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen())+1;
+		if(randomInt==this.bord.getAantalKolommen()){
+			randomInt--;
 		}
-		if ((this.bord.isOnField(randomInt))&&(this.bord.isJuisteZet(randomInt))&&(this.bord.getArray()[this.bord.firstEmptyRow(randomInt)][randomInt].isLeeg())) {
+		if (this.bord.isJuisteZet(randomInt)) {
 			System.out.println("Computer koos kolom "+randomInt);
 			this.bord.zetSchijf(randomInt, this);
 			return;

@@ -4,6 +4,10 @@ public class SpelBord {
 	private Schijf[][] array;
 	private boolean gameOver = false;
 
+	//TODO implement is kolom vol ? daarna gebruik je dit in computer speler!!
+	
+	
+	
 	/**
 	 * Constructor voor het spelbord aantal rijen = aantal kolommen - 1
 	 */
@@ -13,6 +17,9 @@ public class SpelBord {
 		this.generateSpelbord();
 	}
 
+	public void setArray(Schijf[][] x){
+		this.array=x;
+	}
 	
 	public Schijf[][] getArray(){
 		return this.array;
@@ -69,11 +76,18 @@ public class SpelBord {
 		}
 		System.out.println(output);
 	}
-
+	/**
+	 * checkt of de game gedaan is
+	 * @return true als het gedaan is
+	 */
 	public boolean isGameOver() {
 		return gameOver;
 	}
-
+	/**
+	 * zet de gamestate op true/false
+	 * @param gameOver
+	 * 	true/false
+	 */
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
 	}
@@ -85,8 +99,9 @@ public class SpelBord {
 	 * @return true als de speler een juiste zet doet
 	 */
 	public boolean isJuisteZet(int kolom) {
-		if(this.firstEmptyRow(kolom)!=-1){
-			if((this.firstEmptyRow(kolom)<=this.AANTAL_RIJEN)&&(this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())){
+		if(!this.kolomIsVol(kolom)){
+			int rij = this.firstEmptyRow(kolom);
+			if((this.rijIsOnField(rij)&&(this.kolomIsOnField(kolom))&&(this.array[rij][kolom].isLeeg()))){
 				return true;
 			}else{
 				return false;
@@ -111,6 +126,13 @@ public class SpelBord {
 		return -1;
 	}
 	
+	public boolean kolomIsVol(int kolom){
+		if(this.firstEmptyRow(kolom)==-1){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public boolean rijIsOnField(int rij){
 		if((rij>=0)&&(rij<this.AANTAL_RIJEN)){
 			return true;
@@ -118,8 +140,16 @@ public class SpelBord {
 			return false;
 		}
 	}
+	public boolean kolomIsOnField(int kolom) {
+		if ((kolom >= 0) && (kolom < this.AANTAL_KOLOMMEN)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
-
+	
+	
 	/**
 	 * 
 	 * @param kolom
@@ -128,7 +158,7 @@ public class SpelBord {
 	 */
 	public boolean zetSchijf(int kolom, Speler speler) {
 		kolom = kolom - 1;
-		if ((this.isOnField(kolom)) && (this.isJuisteZet(kolom))) {
+		if ((this.kolomIsOnField(kolom)) && (this.isJuisteZet(kolom))) {
 			int rij = this.firstEmptyRow(kolom);
 			this.array[rij][kolom] = speler.getSymbol();
 			return true;
@@ -138,18 +168,7 @@ public class SpelBord {
 	}
 
 	
-	/**
-	 * check if kolom is on field
-	 * @param kolom
-	 * @return true if kolom is on field
-	 */
-	public boolean isOnField(int kolom) {
-		if ((kolom >= 0) && (kolom < this.AANTAL_KOLOMMEN)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 
 	/**
 	 * print de namen, het symbool en het resterende aantal aambeelden van de
@@ -267,5 +286,13 @@ public class SpelBord {
 	 */
 	public int getAantalKolommen() {
 		return this.AANTAL_KOLOMMEN;
+	}
+	
+	public int getAantalRijen(){
+		return this.AANTAL_RIJEN;
+	}
+	
+	public Schijf getSchijf(int kolom){
+		return this.array[this.firstEmptyRow(kolom)+1][kolom];
 	}
 }
