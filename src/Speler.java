@@ -1,5 +1,6 @@
 
 public class Speler {
+	//TODO score implementeren
 	private String naam;
 	private Schijf symbol;
 	private int aantalAambeelden=0;	

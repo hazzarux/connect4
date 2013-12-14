@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Computer extends Speler{
 	private int moeilijkheidsgraad=0;
 	private Schijf symbool = new Kruis();
@@ -12,6 +14,16 @@ public class Computer extends Speler{
 		super.setNaam(this.naam);
 	}
 	
+	public void doeZetMakkelijk(){
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen());
+		if(this.bord.isOnField(randomInt)){
+			this.bord.zetSchijf(randomInt, this);
+			return;
+		}else{
+			this.doeZetMakkelijk();
+		}
+	}
 	
 	
 }

@@ -94,12 +94,11 @@ public class SpelBord {
 	 * @return eerste lege rij
 	 */
 	public int firstEmptyRow(int kolom) {
-		for (int i = AANTAL_RIJEN-1; i >= 0; i--) {
-			if (array[i][kolom].isLeeg()) {
-				return i;
-			}
+		int i=this.AANTAL_RIJEN-1;
+		while(!this.array[i][kolom].isLeeg()){
+			i--;
 		}
-		return 1;
+		return i;
 	}
 	/**
 	 * 
@@ -109,7 +108,7 @@ public class SpelBord {
 	 */
 	public boolean zetSchijf(int kolom, Speler speler) {
 		kolom = kolom - 1;
-		if((kolom>=0)&&(kolom<this.AANTAL_KOLOMMEN)&&(this.isJuisteZet(kolom))){
+		if((isOnField(kolom))&&(this.isJuisteZet(kolom))){
 			int rij = this.firstEmptyRow(kolom);
 			this.array[rij][kolom] = speler.getSymbol();
 			return true;
@@ -118,6 +117,13 @@ public class SpelBord {
 		}
 	}
 	
+	public boolean isOnField(int kolom){
+		if((kolom>=0)&&(kolom<this.AANTAL_KOLOMMEN)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 	
 	
@@ -152,5 +158,9 @@ public class SpelBord {
 		}
 		System.out.println(speler2.getNaam()+" ("+speler2.getSymbol().toString()+") ["+speler2.getAantalAambeelden()+" "+word+ " ("+aambeeldenStr+") resterend]");
 		System.out.println("------");
+	}
+	
+	public int getAantalKolommen(){
+		return this.AANTAL_KOLOMMEN;
 	}
 }
