@@ -36,7 +36,12 @@ public class Spel {
 		System.out.println("Hoeveel aambeelden moet elke speler krijgen?");
 		System.out.println("(1 of 2)");
 		int aantalAambeelden = s.nextInt();
-
+		
+		//waarde voor x (van een aambeeld bepalen)
+		System.out.println("Hoeveel schijven moet een aambeeld verwijderen?");
+		int xAambeeld = s.nextInt();
+		
+		
 		// naam vragen
 		System.out.println("Wat is uw naam?");
 		String naam = s.next();
@@ -56,11 +61,18 @@ public class Spel {
 				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
 					printAlles(bord, human, ai);
+					
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
 					}else{
-						switchPlayer();
+						if(bord.checkVol()){
+							System.out.println("Het bord is vol. Het is gelijkspel. Niemand wint!");
+							bord.setGameOver(true);
+						}else{
+							switchPlayer();
+						}
+						
 					}
 				} else {
 					ai.doeZet();
@@ -68,9 +80,14 @@ public class Spel {
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
+					}else{
+						if(bord.checkVol()){
+							System.out.println("Het bord is vol. Het is gelijkspel. Niemand wint!");
+							bord.setGameOver(true);
+						}else{
+							switchPlayer();
+						}
 					}
-					bord.check4();
-					switchPlayer();
 				}
 
 			}
@@ -105,17 +122,20 @@ public class Spel {
 		}
 
 	}
-
 	
 	public static void checkForWinner(Schijf winnendeSchijf, Speler speler1, Speler speler2, SpelBord bord){
+		Leeg leeg = new Leeg();
 		if(winnendeSchijf.getCharacter().equals(speler1.getSymbol().toString())){
 			speler1.incrementScore();
-			System.out.println(speler1.getNaam()+" is gewonnen! Zijn/haar score is nu "+speler1.getScore()+"!");
+			System.out.println(speler1.getNaam()+" heeft gewonnen! Zijn/haar score is nu "+speler1.getScore()+"!");
 			bord.setGameOver(true);
 			
-		}else{
+		}else if(winnendeSchijf.getCharacter().equals(speler2.getSymbol().toString())){
 			speler2.incrementScore();
-			System.out.println(speler2.getNaam()+" is gewonnen. Zijn score is nu "+speler2.getScore()+"!");
+			System.out.println(speler2.getNaam()+" heeft gewonnen. Zijn score is nu "+speler2.getScore()+"!");
+			bord.setGameOver(true);
+		}else{
+			System.out.println("error");
 			bord.setGameOver(true);
 		}
 	}

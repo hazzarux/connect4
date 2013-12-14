@@ -13,6 +13,11 @@ public class SpelBord {
 		this.generateSpelbord();
 	}
 
+	
+	public Schijf[][] getArray(){
+		return this.array;
+	}
+	
 	/**
 	 * Genereert een 2-dimensionale array van schijven voor het spelbord
 	 * 
@@ -128,7 +133,7 @@ public class SpelBord {
 	 */
 	public boolean zetSchijf(int kolom, Speler speler) {
 		kolom = kolom - 1;
-		if ((isOnField(kolom)) && (this.isJuisteZet(kolom))) {
+		if ((this.isOnField(kolom)) && (this.isJuisteZet(kolom))) {
 			int rij = this.firstEmptyRow(kolom);
 			this.array[rij][kolom] = speler.getSymbol();
 			return true;
@@ -239,6 +244,26 @@ public class SpelBord {
 			}
 		}
 		return null;
+	}
+	/**
+	 * 
+	 * @return true if bord = vol
+	 */
+	public boolean checkVol(){
+		int count = 0;
+		for(int i = 0; i < this.AANTAL_RIJEN;i++){
+			for(int x = 0; x<this.AANTAL_KOLOMMEN;x++){
+				if(this.array[i][x].isLeeg()){
+					count++;
+				}
+			}
+		}
+		
+		if(count==0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	/**

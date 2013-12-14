@@ -18,8 +18,10 @@ public class Computer extends Speler {
 	public void doeZetMakkelijk() {
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen());
-		randomInt=randomInt+1;
-		if (this.bord.isOnField(randomInt)) {
+		if(randomInt==0){
+			randomInt=randomInt+1;
+		}
+		if ((this.bord.isOnField(randomInt))&&(this.bord.isJuisteZet(randomInt))&&(this.bord.getArray()[this.bord.firstEmptyRow(randomInt)][randomInt].isLeeg())) {
 			System.out.println("Computer koos kolom "+randomInt);
 			this.bord.zetSchijf(randomInt, this);
 			return;
