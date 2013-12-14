@@ -15,6 +15,26 @@ public class Computer extends Speler {
 		super.setNaam(this.naam);
 	}
 
+	
+	//TODO implement doezetnormaal
+	public void doeZetNormaal(){
+		Leeg leeg = new Leeg();
+		Speler lege = new Speler();
+		int teZettenKolom=0;
+		lege.setSymbol(leeg);
+		for(int i = 0;i<this.bord.getAantalKolommen();i++){
+			
+			if(this.bord.check4()==this.symbool){
+				teZettenKolom=i;
+			}else{
+				
+			}
+			this.bord.zetSchijf(i, lege);
+		}
+		
+		this.bord.zetSchijf(teZettenKolom, this);
+	}
+	
 	public void doeZetMakkelijk() {
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen());
@@ -33,6 +53,8 @@ public class Computer extends Speler {
 	public void doeZet(){
 		if(this.moeilijkheidsgraad==1){
 			this.doeZetMakkelijk();
+		}else if(this.moeilijkheidsgraad==2){
+			this.doeZetNormaal();
 		}
 	}
 

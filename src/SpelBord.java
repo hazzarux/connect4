@@ -85,7 +85,7 @@ public class SpelBord {
 	 * @return true als de speler een juiste zet doet
 	 */
 	public boolean isJuisteZet(int kolom) {
-		if(this.firstEmptyRow(kolom)!=-50){
+		if(this.firstEmptyRow(kolom)!=-1){
 			if((this.firstEmptyRow(kolom)<=this.AANTAL_RIJEN)&&(this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())){
 				return true;
 			}else{
@@ -103,17 +103,12 @@ public class SpelBord {
 	 * @return eerste lege rij
 	 */
 	public int firstEmptyRow(int kolom) {
-		int i = this.AANTAL_RIJEN - 1;
-		while (!this.array[i][kolom].isLeeg()) {
-			if(i==0){
-				return -50;
+		for(int i=this.AANTAL_RIJEN-1;i>=0;i--){
+			if(this.array[i][kolom].isLeeg()){
+				return i;
 			}
-			else{
-				i--;
-			}
-			
 		}
-		return i;
+		return -1;
 	}
 	
 	public boolean rijIsOnField(int rij){
