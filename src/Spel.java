@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Spel {
 	static Scanner s = new Scanner(System.in);
-	static int aanDeBeurt;
+	static int aanDeBeurt=1;
 
 	public static void main(String[] args) {
 		System.out.println("F. Yigit Ozkan, r0456142");
@@ -58,7 +58,8 @@ public class Spel {
 					printAlles(bord, human, ai);
 					switchPlayer();
 				} else {
-					ai.doeZetMakkelijk();
+					ai.doeZet();
+					printAlles(bord, human, ai);
 					switchPlayer();
 				}
 

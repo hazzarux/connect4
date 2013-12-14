@@ -121,6 +121,12 @@ public class SpelBord {
 		}
 	}
 
+	
+	/**
+	 * check if kolom is on field
+	 * @param kolom
+	 * @return true if kolom is on field
+	 */
 	public boolean isOnField(int kolom) {
 		if ((kolom >= 0) && (kolom < this.AANTAL_KOLOMMEN)) {
 			return true;
