@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Computer extends Speler {
+	//TODO verschillende moeilijkheidsgraden implementeren
 	private int moeilijkheidsgraad = 0;
 	private Schijf symbool = new Kruis();
 	private SpelBord bord;

@@ -3,8 +3,6 @@ public class SpelBord {
 	private int AANTAL_RIJEN = 0;
 	private Schijf[][] array;
 	private boolean gameOver = false;
-	private int[][] directions = { { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 },
-			{ 0, -1 }, { -1, -1 }, { -1, 0 }, { -1, 1 } };
 
 	/**
 	 * Constructor voor het spelbord aantal rijen = aantal kolommen - 1
