@@ -174,7 +174,62 @@ public class SpelBord {
 				+ aambeeldenStr + ") resterend]");
 		System.out.println("------");
 	}
-
+	
+	
+	/**
+	 * controleren of er 4 op een rij is
+	 * @return winnend symbool
+	 * 	null als er niemand wint
+	 */
+	public Schijf check4() {
+		// horizontale rijen
+		for (int rij = 0; rij < this.AANTAL_RIJEN; rij++) {
+			for (int kolom = 0; kolom < this.AANTAL_KOLOMMEN - 3; kolom++) {
+				Schijf curr = this.array[rij][kolom];
+				if ((!curr.isLeeg()) && curr == this.array[rij][kolom + 1]
+						&& curr == this.array[rij][kolom + 2]
+						&& curr == this.array[rij][kolom + 3]) {
+					return this.array[rij][kolom];
+				}
+			}
+		}
+		// verticale kolommen
+		for (int kolom = 0; kolom < this.AANTAL_KOLOMMEN; kolom++) {
+			for (int rij = 0; rij < this.AANTAL_RIJEN - 3; rij++) {
+				Schijf curr = this.array[rij][kolom];
+				if ((!curr.isLeeg()) && curr == this.array[rij + 1][kolom]
+						&& curr == this.array[rij + 2][kolom]
+						&& curr == this.array[rij + 3][kolom])
+					return this.array[rij][kolom];
+			}
+		}
+		// diagonal lower left to upper right
+		for (int rij = 0; rij < this.AANTAL_RIJEN - 3; rij++) {
+			for (int kolom = 0; kolom < this.AANTAL_KOLOMMEN - 3; kolom++) {
+				Schijf curr = this.array[rij][kolom];
+				if ((!curr.isLeeg()) && curr == this.array[rij + 1][kolom + 1]
+						&& curr == this.array[rij + 2][kolom + 2]
+						&& curr == this.array[rij + 3][kolom + 3])
+					return this.array[rij][kolom];
+			}
+		}
+		// diagonal upper left to lower right
+		for (int rij = this.AANTAL_RIJEN - 1; rij >= 3; rij--) {
+			for (int kolom = 0; kolom < this.AANTAL_KOLOMMEN - 3; kolom++) {
+				Schijf curr = this.array[rij][kolom];
+				if ((!curr.isLeeg())&& curr == this.array[rij - 1][kolom + 1]
+						&& curr == this.array[rij - 2][kolom + 2]
+						&& curr == this.array[rij - 3][kolom + 3])
+					return this.array[rij][kolom];
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * geeft aantal kolommen terug
+	 * @return aantal kolommen
+	 */
 	public int getAantalKolommen() {
 		return this.AANTAL_KOLOMMEN;
 	}

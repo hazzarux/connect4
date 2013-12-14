@@ -56,10 +56,22 @@ public class Spel {
 				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
 					printAlles(bord, human, ai);
-					switchPlayer();
+					if(bord.check4()!=null){
+						Schijf x = bord.check4();
+						System.out.println(x);
+						bord.setGameOver(true);
+					}else{
+						switchPlayer();
+					}
 				} else {
 					ai.doeZet();
 					printAlles(bord, human, ai);
+					if(bord.check4()!=null){
+						Schijf x = bord.check4();
+						System.out.println(x);
+						bord.setGameOver(true);
+					}
+					bord.check4();
 					switchPlayer();
 				}
 
