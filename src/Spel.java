@@ -20,8 +20,6 @@ public class Spel {
 
 		boolean playAnotherGame = false;
 
-		// TODO: playanothergame implementeren
-
 		// grootte van het spelbord bepalen
 		System.out
 				.println("Hoe groot moet het spelbord zijn? Dit is het aantal kolommen.");
@@ -45,7 +43,6 @@ public class Spel {
 
 		// bord genereren
 		SpelBord bord = new SpelBord(grootteSpelBord);
-		//bord.printSpelbord();
 
 		// spelers genereren (computerspeler met bepaalde moeilijkheidsgraad)
 		Mens human = new Mens(aantalAambeelden, bord, naam);
