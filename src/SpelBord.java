@@ -203,7 +203,7 @@ public class SpelBord {
 					return this.array[rij][kolom];
 			}
 		}
-		// diagonal lower left to upper right
+		// diagonaal links beneden naar rechts boven
 		for (int rij = 0; rij < this.AANTAL_RIJEN - 3; rij++) {
 			for (int kolom = 0; kolom < this.AANTAL_KOLOMMEN - 3; kolom++) {
 				Schijf curr = this.array[rij][kolom];
@@ -213,7 +213,7 @@ public class SpelBord {
 					return this.array[rij][kolom];
 			}
 		}
-		// diagonal upper left to lower right
+		// diagonaal links boven naar rechts beneden
 		for (int rij = this.AANTAL_RIJEN - 1; rij >= 3; rij--) {
 			for (int kolom = 0; kolom < this.AANTAL_KOLOMMEN - 3; kolom++) {
 				Schijf curr = this.array[rij][kolom];
