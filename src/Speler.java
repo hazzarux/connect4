@@ -3,7 +3,9 @@ public class Speler {
 	private String naam;
 	private Schijf symbol;
 	private int aantalAambeelden = 0;
-
+	private int score=0;
+	
+	
 	public String getNaam() {
 		return naam;
 	}
@@ -26,6 +28,22 @@ public class Speler {
 
 	public void setAantalAambeelden(int aantalAambeelden) {
 		this.aantalAambeelden = aantalAambeelden;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	
+	/**
+	 * increments the player's score by 1
+	 */
+	public void incrementScore(){
+		this.score = this.score+1;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }

@@ -82,10 +82,13 @@ public class SpelBord {
 	 * @return true als de speler een juiste zet doet
 	 */
 	public boolean isJuisteZet(int kolom) {
-		if ((this.firstEmptyRow(kolom) <= AANTAL_RIJEN)
-				&& (this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())) {
-			return true;
-		} else {
+		if(this.firstEmptyRow(kolom)!=-50){
+			if((this.firstEmptyRow(kolom)<=this.AANTAL_RIJEN)&&(this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
 			return false;
 		}
 	}
@@ -99,10 +102,25 @@ public class SpelBord {
 	public int firstEmptyRow(int kolom) {
 		int i = this.AANTAL_RIJEN - 1;
 		while (!this.array[i][kolom].isLeeg()) {
-			i--;
+			if(i==0){
+				return -50;
+			}
+			else{
+				i--;
+			}
+			
 		}
 		return i;
 	}
+	
+	public boolean rijIsOnField(int rij){
+		if((rij>=0)&&(rij<this.AANTAL_RIJEN)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 
 	/**
 	 * 
@@ -143,8 +161,7 @@ public class SpelBord {
 	 * @param speler2
 	 */
 	public void printNamenEnAambeelden(Speler speler1, Speler speler2) {
-		// TODO score toevoegen aan output
-		System.out.println("------");
+		System.out.println("----------------------------------------------------------");
 		String word;
 		String aambeeldenStr;
 		Aambeeld aambeeld = new Aambeeld();
@@ -160,7 +177,7 @@ public class SpelBord {
 		System.out.println(speler1.getNaam() + " ("
 				+ speler1.getSymbol().toString() + ") ["
 				+ speler1.getAantalAambeelden() + " " + word + " ("
-				+ aambeeldenStr + ") resterend]");
+				+ aambeeldenStr + ") resterend]. Score: "+speler1.getScore());
 
 		// print voor speler 2
 		if (speler2.getAantalAambeelden() == 1) {
@@ -171,8 +188,8 @@ public class SpelBord {
 		System.out.println(speler2.getNaam() + " ("
 				+ speler2.getSymbol().toString() + ") ["
 				+ speler2.getAantalAambeelden() + " " + word + " ("
-				+ aambeeldenStr + ") resterend]");
-		System.out.println("------");
+				+ aambeeldenStr + ") resterend]. Score: "+speler2.getScore());
+		System.out.println("----------------------------------------------------------");
 	}
 	
 	

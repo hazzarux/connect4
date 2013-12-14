@@ -99,8 +99,11 @@ public class Spel {
 
 		if (yesOrNo.equals("j")) {
 			return true;
-		} else {
+		} else if(yesOrNo.equals("n")) {
 			return false;
+		}else{
+			System.out.println("Ongeldige input!");
+			return promptIfPlayerWantsToPlayAgain();
 		}
 
 	}
