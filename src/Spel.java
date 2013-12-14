@@ -58,8 +58,7 @@ public class Spel {
 					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
-						System.out.println(x);
-						bord.setGameOver(true);
+						checkForWinner(x, human, ai, bord);
 					}else{
 						switchPlayer();
 					}
@@ -68,8 +67,7 @@ public class Spel {
 					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
-						System.out.println(x);
-						bord.setGameOver(true);
+						checkForWinner(x, human, ai, bord);
 					}
 					bord.check4();
 					switchPlayer();
@@ -108,6 +106,20 @@ public class Spel {
 
 	}
 
+	
+	public static void checkForWinner(Schijf winnendeSchijf, Speler speler1, Speler speler2, SpelBord bord){
+		if(winnendeSchijf.getCharacter().equals(speler1.getSymbol().toString())){
+			speler1.incrementScore();
+			System.out.println(speler1.getNaam()+" is gewonnen! Zijn/haar score is nu "+speler1.getScore()+"!");
+			bord.setGameOver(true);
+			
+		}else{
+			speler2.incrementScore();
+			System.out.println(speler2.getNaam()+" is gewonnen. Zijn score is nu "+speler2.getScore()+"!");
+			bord.setGameOver(true);
+		}
+	}
+	
 	public static void printAlles(SpelBord bord, Speler speler1, Speler speler2) {
 		bord.printSpelbord();
 		bord.printNamenEnAambeelden(speler1, speler2);
