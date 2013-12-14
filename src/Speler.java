@@ -1,10 +1,9 @@
-
 public class Speler {
-	//TODO score implementeren
+	// TODO score implementeren
 	private String naam;
 	private Schijf symbol;
-	private int aantalAambeelden=0;	
-	
+	private int aantalAambeelden = 0;
+
 	public String getNaam() {
 		return naam;
 	}
@@ -28,5 +27,5 @@ public class Speler {
 	public void setAantalAambeelden(int aantalAambeelden) {
 		this.aantalAambeelden = aantalAambeelden;
 	}
-	
+
 }

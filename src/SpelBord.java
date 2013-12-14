@@ -3,7 +3,8 @@ public class SpelBord {
 	private int AANTAL_RIJEN = 0;
 	private Schijf[][] array;
 	private boolean gameOver = false;
-	private int[][] directions={{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
+	private int[][] directions = { { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 },
+			{ 0, -1 }, { -1, -1 }, { -1, 0 }, { -1, 1 } };
 
 	/**
 	 * Constructor voor het spelbord aantal rijen = aantal kolommen - 1
@@ -81,25 +82,28 @@ public class SpelBord {
 	 * @return true als de speler een juiste zet doet
 	 */
 	public boolean isJuisteZet(int kolom) {
-		if((this.firstEmptyRow(kolom)<=AANTAL_RIJEN)&&(this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())){
+		if ((this.firstEmptyRow(kolom) <= AANTAL_RIJEN)
+				&& (this.array[this.firstEmptyRow(kolom)][kolom].isLeeg())) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
 	/**
 	 * functie om de eerste lege rij (van onderaan) te zoeken
+	 * 
 	 * @param kolom
 	 * @return eerste lege rij
 	 */
 	public int firstEmptyRow(int kolom) {
-		int i=this.AANTAL_RIJEN-1;
-		while(!this.array[i][kolom].isLeeg()){
+		int i = this.AANTAL_RIJEN - 1;
+		while (!this.array[i][kolom].isLeeg()) {
 			i--;
 		}
 		return i;
 	}
+
 	/**
 	 * 
 	 * @param kolom
@@ -108,59 +112,64 @@ public class SpelBord {
 	 */
 	public boolean zetSchijf(int kolom, Speler speler) {
 		kolom = kolom - 1;
-		if((isOnField(kolom))&&(this.isJuisteZet(kolom))){
+		if ((isOnField(kolom)) && (this.isJuisteZet(kolom))) {
 			int rij = this.firstEmptyRow(kolom);
 			this.array[rij][kolom] = speler.getSymbol();
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public boolean isOnField(int kolom){
-		if((kolom>=0)&&(kolom<this.AANTAL_KOLOMMEN)){
+
+	public boolean isOnField(int kolom) {
+		if ((kolom >= 0) && (kolom < this.AANTAL_KOLOMMEN)) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	
-	
-	
+
 	/**
-	 * print de namen, het symbool en het resterende aantal aambeelden van de spelers
+	 * print de namen, het symbool en het resterende aantal aambeelden van de
+	 * spelers
+	 * 
 	 * @param speler1
 	 * @param speler2
 	 */
-	public void printNamenEnAambeelden(Speler speler1,Speler speler2){
+	public void printNamenEnAambeelden(Speler speler1, Speler speler2) {
 		// TODO score toevoegen aan output
 		System.out.println("------");
 		String word;
 		String aambeeldenStr;
 		Aambeeld aambeeld = new Aambeeld();
-		
-		//print voor speler 1
-		if(speler1.getAantalAambeelden()==1){
+
+		// print voor speler 1
+		if (speler1.getAantalAambeelden() == 1) {
 			word = "aambeeld";
-			aambeeldenStr=aambeeld.toString();
-		}else{
-			word="aambeelden";
-			aambeeldenStr=aambeeld.toString()+","+aambeeld.toString();
+			aambeeldenStr = aambeeld.toString();
+		} else {
+			word = "aambeelden";
+			aambeeldenStr = aambeeld.toString() + "," + aambeeld.toString();
 		}
-		System.out.println(speler1.getNaam()+" ("+speler1.getSymbol().toString()+") ["+speler1.getAantalAambeelden()+" "+word+" ("+aambeeldenStr+") resterend]");
-		
-		//print voor speler 2
-		if(speler2.getAantalAambeelden()==1){
-			word="aambeeld";
-		}else{
-			word="aambeelden";
+		System.out.println(speler1.getNaam() + " ("
+				+ speler1.getSymbol().toString() + ") ["
+				+ speler1.getAantalAambeelden() + " " + word + " ("
+				+ aambeeldenStr + ") resterend]");
+
+		// print voor speler 2
+		if (speler2.getAantalAambeelden() == 1) {
+			word = "aambeeld";
+		} else {
+			word = "aambeelden";
 		}
-		System.out.println(speler2.getNaam()+" ("+speler2.getSymbol().toString()+") ["+speler2.getAantalAambeelden()+" "+word+ " ("+aambeeldenStr+") resterend]");
+		System.out.println(speler2.getNaam() + " ("
+				+ speler2.getSymbol().toString() + ") ["
+				+ speler2.getAantalAambeelden() + " " + word + " ("
+				+ aambeeldenStr + ") resterend]");
 		System.out.println("------");
 	}
-	
-	public int getAantalKolommen(){
+
+	public int getAantalKolommen() {
 		return this.AANTAL_KOLOMMEN;
 	}
 }

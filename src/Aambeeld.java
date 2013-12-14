@@ -1,5 +1,5 @@
 public class Aambeeld extends Schijf {
-	public Aambeeld(){
+	public Aambeeld() {
 		super.setCharacter("#");
 	}
 }

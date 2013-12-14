@@ -1,8 +1,6 @@
-
-public class Kruis extends Schijf{
-	public Kruis(){
+public class Kruis extends Schijf {
+	public Kruis() {
 		super.setCharacter("X");
 	}
-	
-	
+
 }

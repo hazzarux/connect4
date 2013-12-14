@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Spel {
 	static Scanner s = new Scanner(System.in);
 	static int aanDeBeurt;
+
 	public static void main(String[] args) {
 		System.out.println("F. Yigit Ozkan, r0456142");
 
@@ -50,35 +51,31 @@ public class Spel {
 		Mens human = new Mens(aantalAambeelden, bord, naam);
 		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord);
 
-		
 		do {
 			while (bord.isGameOver() == false) {
-				if(aanDeBeurt==1){
+				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
 					printAlles(bord, human, ai);
 					switchPlayer();
-					}else{
+				} else {
 					ai.doeZetMakkelijk();
 					switchPlayer();
 				}
-				
+
 			}
 			playAnotherGame = promptIfPlayerWantsToPlayAgain();
 		} while (playAnotherGame == true);
 
 	}
 
-	
-	
-	public static void switchPlayer(){
-		if(aanDeBeurt==1){
-			aanDeBeurt=2;
-		}else{
-			aanDeBeurt=1;
+	public static void switchPlayer() {
+		if (aanDeBeurt == 1) {
+			aanDeBeurt = 2;
+		} else {
+			aanDeBeurt = 1;
 		}
 	}
-	
-	
+
 	/**
 	 * returns true if player wants to play again, else: false
 	 */

@@ -1,6 +1,5 @@
-
 public class Leeg extends Schijf {
-	public Leeg(){
+	public Leeg() {
 		super.setCharacter("_");
 	}
 }
