@@ -5,8 +5,11 @@ public class Spel {
 	static int aanDeBeurt=1;
 
 	public static void main(String[] args) {
-		System.out.println("F. Yigit Ozkan, r0456142");
+		boolean playAnotherGame = false;
 
+		// naam
+		System.out.println("F. Yigit Ozkan, r0456142");
+		
 		// "Vier op een rij" printen
 		String welcomeMessage = "__      ___                                                  _ _ \n"
 				+ "\\ \\    / (_)                                                (_|_)\n"
@@ -17,8 +20,14 @@ public class Spel {
 				+ "                             | |                             _/ |\n"
 				+ "                             |_|                            |__/ ";
 		System.out.println(welcomeMessage);
-
-		boolean playAnotherGame = false;
+		// tutorial
+		System.out.println("========================================================");
+		System.out.println("Tutorial:");
+		System.out.println("----------");
+		System.out.println("De menselijke speler zet rondjes.");
+		System.out.println("De computerspeler zet kruisjes.");
+		System.out.println("Om een aambeeld (#) te gebruiken schrijft u 'a...' (zonder apostrofe) en waar ... het kolomnummer is.");
+		System.out.println("========================================================");
 
 		// grootte van het spelbord bepalen
 		System.out
@@ -53,6 +62,9 @@ public class Spel {
 		Mens human = new Mens(aantalAambeelden, bord, naam, xAambeeld);
 		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord, xAambeeld);
 
+		
+		
+		// main functie
 		do {
 			bord.generateSpelbord();
 			bord.setGameOver(false);
@@ -96,7 +108,9 @@ public class Spel {
 		} while (playAnotherGame == true);
 
 	}
-
+	/**
+	 * if human player is playing, switch to computer player
+	 */
 	public static void switchPlayer() {
 		if (aanDeBeurt == 1) {
 			aanDeBeurt = 2;
@@ -106,7 +120,8 @@ public class Spel {
 	}
 
 	/**
-	 * returns true if player wants to play again, else: false
+	 * prompt for "another game?"
+	 * @return true if player wants to play again
 	 */
 	public static boolean promptIfPlayerWantsToPlayAgain() {
 		System.out.println("Wilt u opnieuw spelen? (j/n)");
@@ -123,7 +138,13 @@ public class Spel {
 		}
 
 	}
-	
+	/**
+	 * checken of er een winnaar is (4 op een rij)
+	 * @param winnendeSchijf
+	 * @param speler1
+	 * @param speler2
+	 * @param bord
+	 */
 	public static void checkForWinner(Schijf winnendeSchijf, Speler speler1, Speler speler2, SpelBord bord){
 		if(winnendeSchijf.getCharacter().equals(speler1.getSymbol().toString())){
 			speler1.incrementScore();
@@ -139,7 +160,12 @@ public class Spel {
 			bord.setGameOver(true);
 		}
 	}
-	
+	/**
+	 * spelbord printen + header + footer + namen van spelers (met score en aantal resterende aambeelden)
+	 * @param bord
+	 * @param speler1
+	 * @param speler2
+	 */
 	public static void printAlles(SpelBord bord, Speler speler1, Speler speler2) {
 		bord.printSpelbord();
 		bord.printNamenEnAambeelden(speler1, speler2);
