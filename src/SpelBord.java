@@ -14,7 +14,11 @@ public class SpelBord {
 		this.generateSpelbord();
 	}
 
-	
+	/**
+	 * maakt een deep copy van de 2D array
+	 * @param input
+	 * @return result(2D array van schijven)
+	 */
 	public Schijf[][] deepCopyMatrix(Schijf[][] input) {
 	    if (input == null)
 	        return null;
