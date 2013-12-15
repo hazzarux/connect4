@@ -17,12 +17,20 @@ public class Computer extends Speler {
 		super.setxAambeeld(xWaardeAambeeld);
 	}
 
-	public void doeZetNormaal(){
+	public void doeZetMoeilijk(){
 		SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
 		bord2.generateSpelbord();
 		Schijf[][] deepCopy = this.bord.deepCopyMatrix(this.bord.getArray());
 		bord2.setArray(deepCopy);
 		bord2.zetSchijf(3, this.symbool);
+		
+	}
+	
+	public void doeZetNormaal(){
+		SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
+		bord2.generateSpelbord();
+		Schijf[][] deepCopy = this.bord.deepCopyMatrix(this.bord.getArray());
+		bord2.setArray(deepCopy);
 		int result = -1;
 		for(int i=1;i<=this.bord.getAantalKolommen();i++){
 			if(bord2.zetSchijf(i, this.symbool)){
@@ -58,6 +66,8 @@ public class Computer extends Speler {
 			this.doeZetMakkelijk();
 		}else if(this.moeilijkheidsgraad==2){
 			this.doeZetNormaal();
+		}else if(this.moeilijkheidsgraad==3){
+			this.doeZetMoeilijk();
 		}
 	}
 
