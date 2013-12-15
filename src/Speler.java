@@ -3,7 +3,7 @@ public class Speler {
 	private Schijf symbol;
 	private int aantalAambeelden = 0;
 	private int score=0;
-	
+	private int xAambeeld=0;
 	
 	public String getNaam() {
 		return naam;
@@ -43,6 +43,14 @@ public class Speler {
 	
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public int getxAambeeld() {
+		return xAambeeld;
+	}
+
+	public void setxAambeeld(int xAambeeld) {
+		this.xAambeeld = xAambeeld;
 	}
 
 }

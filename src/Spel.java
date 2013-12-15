@@ -50,13 +50,15 @@ public class Spel {
 		SpelBord bord = new SpelBord(grootteSpelBord);
 
 		// spelers genereren (computerspeler met bepaalde moeilijkheidsgraad)
-		Mens human = new Mens(aantalAambeelden, bord, naam);
-		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord);
+		Mens human = new Mens(aantalAambeelden, bord, naam, xAambeeld);
+		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord, xAambeeld);
 
 		do {
 			bord.generateSpelbord();
 			bord.setGameOver(false);
 			bord.printSpelbord();
+			human.setAantalAambeelden(aantalAambeelden);
+			ai.setAantalAambeelden(aantalAambeelden);
 			while (bord.isGameOver() == false) {
 				printAlles(bord, human, ai);
 				if (aanDeBeurt == 1) {

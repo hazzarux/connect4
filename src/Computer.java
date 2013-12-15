@@ -1,57 +1,51 @@
 import java.util.Random;
 
 public class Computer extends Speler {
+	
+	//TODO aambeeld implementeren
 	//TODO verschillende moeilijkheidsgraden implementeren
 	private int moeilijkheidsgraad = 0;
 	private Schijf symbool = new Kruis();
 	private SpelBord bord;
 	private String naam = "Computer";
 
-	public Computer(int moeilijkheidsgraad, int aantalAambeelden, SpelBord bord) {
+	public Computer(int moeilijkheidsgraad, int aantalAambeelden, SpelBord bord, int xWaardeAambeeld) {
 		this.moeilijkheidsgraad = moeilijkheidsgraad;
 		this.bord = bord;
 		super.setAantalAambeelden(aantalAambeelden);
 		super.setSymbol(this.symbool);
 		super.setNaam(this.naam);
+		super.setxAambeeld(xWaardeAambeeld);
 	}
 
 	//TODO implement doe zet normaal
 	public void doeZetNormaal(){
-		
-		/*SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
-		
-		bord2.setArray(this.bord.getArray());
-		int result=-1;
-		for(int i = 0;i<bord2.getAantalKolommen();i++){
-			Schijf x = bord2.getSchijf(i);
-			bord2.zetSchijf(i, this);
-			if(bord2.check4()==this.symbool){
-				result=i;
+		SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
+		bord2.setArray(this.bord.getArray().clone());
+		int result = -1;
+		for(int i=1;i<=this.bord.getAantalKolommen();i++){
+			if(bord2.zetSchijf(i, this.symbool)){
+				if(bord2.check4()==this.symbool){
+					result=i;
+				}
 			}
-			if(x.getCharacter())
-			bord2.zetSchijf(i, x);
+			bord2.setArray(this.bord.getArray().clone());
 		}
 		
 		if(result!=-1){
-			this.bord.zetSchijf(result, this);
+			this.bord.zetSchijf(result, this.symbool);
 		}else{
 			this.doeZetMakkelijk();
-		}*/
+		}
 	}
 	
 	public void doeZetMakkelijk() {
 		Random randomGenerator = new Random();
-		int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen())+1;
-		if(randomInt==this.bord.getAantalKolommen()){
-			randomInt--;
-		}
-		if (this.bord.isJuisteZet(randomInt)) {
-			System.out.println("Computer koos kolom "+randomInt);
-			this.bord.zetSchijf(randomInt, this);
-			return;
-		} else {
-			this.doeZetMakkelijk();
-		}
+		boolean succes=false;
+		do{
+			int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen())+1;
+			succes = this.bord.zetSchijf(randomInt, this.symbool);
+		}while(succes!=true);
 	}
 	
 	public void doeZet(){

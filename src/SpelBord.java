@@ -99,9 +99,9 @@ public class SpelBord {
 	 * @return true als de speler een juiste zet doet
 	 */
 	public boolean isJuisteZet(int kolom) {
-		if(!this.kolomIsVol(kolom)){
+		if((this.kolomIsOnField(kolom))&&(!this.kolomIsVol(kolom))){
 			int rij = this.firstEmptyRow(kolom);
-			if((this.rijIsOnField(rij)&&(this.kolomIsOnField(kolom))&&(this.array[rij][kolom].isLeeg()))){
+			if((this.rijIsOnField(rij)&&(this.array[rij][kolom].isLeeg()))){
 				return true;
 			}else{
 				return false;
@@ -156,19 +156,34 @@ public class SpelBord {
 	 * @param speler
 	 * @return true als schijf geplaatst is
 	 */
-	public boolean zetSchijf(int kolom, Speler speler) {
+	public boolean zetSchijf(int kolom, Schijf schijf) {
 		kolom = kolom - 1;
 		if ((this.kolomIsOnField(kolom)) && (this.isJuisteZet(kolom))) {
 			int rij = this.firstEmptyRow(kolom);
-			this.array[rij][kolom] = speler.getSymbol();
+			this.array[rij][kolom] = schijf;
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	public void zetAambeeld(int kolom, int xWaarde, Speler speler){
+		speler.setAantalAambeelden(speler.getAantalAambeelden()-1);
+		kolom=kolom-1;
+		Aambeeld aam = new Aambeeld();
+		Leeg lege = new Leeg();
+		if(this.kolomIsOnField(kolom)){
+			for(int i=0;i<=xWaarde;i++){
+				int top = this.getTop(kolom);
+				this.array[top][kolom]=lege;
+			}
+		}
+	}
 	
-	
+	public int getTop(int kolom){
+		int firstEmpty = this.firstEmptyRow(kolom);
+		return firstEmpty;
+	}
 
 	/**
 	 * print de namen, het symbool en het resterende aantal aambeelden van de
@@ -187,9 +202,12 @@ public class SpelBord {
 		if (speler1.getAantalAambeelden() == 1) {
 			word = "aambeeld";
 			aambeeldenStr = aambeeld.toString();
-		} else {
+		} else if(speler1.getAantalAambeelden()==2){
 			word = "aambeelden";
 			aambeeldenStr = aambeeld.toString() + "," + aambeeld.toString();
+		}else{
+			word="aambeelden";
+			aambeeldenStr="";
 		}
 		System.out.println(speler1.getNaam() + " ("
 				+ speler1.getSymbol().toString() + ") ["
@@ -199,8 +217,12 @@ public class SpelBord {
 		// print voor speler 2
 		if (speler2.getAantalAambeelden() == 1) {
 			word = "aambeeld";
-		} else {
+		}else if(speler1.getAantalAambeelden()==2){
 			word = "aambeelden";
+			aambeeldenStr = aambeeld.toString() + "," + aambeeld.toString();
+		}else{
+			word="aambeelden";
+			aambeeldenStr="";
 		}
 		System.out.println(speler2.getNaam() + " ("
 				+ speler2.getSymbol().toString() + ") ["
@@ -292,7 +314,4 @@ public class SpelBord {
 		return this.AANTAL_RIJEN;
 	}
 	
-	public Schijf getSchijf(int kolom){
-		return this.array[this.firstEmptyRow(kolom)+1][kolom];
-	}
 }
