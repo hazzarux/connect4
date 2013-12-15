@@ -21,7 +21,16 @@ public class Computer extends Speler {
 	//TODO implement doe zet normaal
 	public void doeZetNormaal(){
 		SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
-		bord2.setArray(this.bord.getArray().clone());
+		bord2.generateSpelbord();
+		Schijf[][] deepCopy = this.bord.deepCopyMatrix(this.bord.getArray());
+		bord2.setArray(deepCopy);
+		bord2.zetSchijf(3, this.symbool);
+		System.out.println(bord2);
+		System.out.println(this.bord);
+		
+		bord2.printSpelbord();
+		
+		/*SpelBord bord2 = this.bord.clone();
 		int result = -1;
 		for(int i=1;i<=this.bord.getAantalKolommen();i++){
 			if(bord2.zetSchijf(i, this.symbool)){
@@ -29,14 +38,14 @@ public class Computer extends Speler {
 					result=i;
 				}
 			}
-			bord2.setArray(this.bord.getArray().clone());
+			bord2.setArray(this.bord.getArray());
 		}
 		
 		if(result!=-1){
 			this.bord.zetSchijf(result, this.symbool);
 		}else{
 			this.doeZetMakkelijk();
-		}
+		}*/
 	}
 	
 	public void doeZetMakkelijk() {

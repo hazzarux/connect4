@@ -4,9 +4,6 @@ public class SpelBord {
 	private Schijf[][] array;
 	private boolean gameOver = false;
 
-	//TODO implement is kolom vol ? daarna gebruik je dit in computer speler!!
-	
-	
 	
 	/**
 	 * Constructor voor het spelbord aantal rijen = aantal kolommen - 1
@@ -17,8 +14,20 @@ public class SpelBord {
 		this.generateSpelbord();
 	}
 
+	
+	public Schijf[][] deepCopyMatrix(Schijf[][] input) {
+	    if (input == null)
+	        return null;
+	    Schijf[][] result = new Schijf[input.length][];
+	    for (int r = 0; r < input.length; r++) {
+	        result[r] = input[r].clone();
+	    }
+	    return result;
+	}
+	
+	
 	public void setArray(Schijf[][] x){
-		this.array=x;
+		this.array=x.clone();
 	}
 	
 	public Schijf[][] getArray(){
