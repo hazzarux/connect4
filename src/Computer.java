@@ -2,8 +2,7 @@ import java.util.Random;
 
 public class Computer extends Speler {
 	
-	//TODO aambeeld implementeren
-	//TODO verschillende moeilijkheidsgraden implementeren
+	//TODO verschillende moeilijkheidsgraden implementeren. 3e moeilijkheidsgraad.
 	private int moeilijkheidsgraad = 0;
 	private Schijf symbool = new Kruis();
 	private SpelBord bord;
@@ -18,7 +17,6 @@ public class Computer extends Speler {
 		super.setxAambeeld(xWaardeAambeeld);
 	}
 
-	//TODO implement doe zet normaal
 	public void doeZetNormaal(){
 		SpelBord bord2 = new SpelBord(this.bord.getAantalKolommen());
 		bord2.generateSpelbord();
