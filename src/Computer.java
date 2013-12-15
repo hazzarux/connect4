@@ -35,6 +35,7 @@ public class Computer extends Speler {
 		
 		if(result!=-1){
 			this.bord.zetSchijf(result, this.symbool);
+			System.out.println("Computer koos kolom "+result+".");
 		}else{
 			this.doeZetMakkelijk();
 		}
@@ -46,6 +47,9 @@ public class Computer extends Speler {
 		do{
 			int randomInt = randomGenerator.nextInt(this.bord.getAantalKolommen())+1;
 			succes = this.bord.zetSchijf(randomInt, this.symbool);
+			if(succes==true){
+				System.out.println("Computer koos kolom "+randomInt+".");
+			}
 		}while(succes!=true);
 	}
 	
