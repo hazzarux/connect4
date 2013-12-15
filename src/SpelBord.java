@@ -175,7 +175,7 @@ public class SpelBord {
 			return false;
 		}
 	}
-
+	//TODO aambeeld
 	public void zetAambeeld(int kolom, int xWaarde, Speler speler){
 		speler.setAantalAambeelden(speler.getAantalAambeelden()-1);
 		kolom=kolom-1;

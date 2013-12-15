@@ -60,10 +60,9 @@ public class Spel {
 			human.setAantalAambeelden(aantalAambeelden);
 			ai.setAantalAambeelden(aantalAambeelden);
 			while (bord.isGameOver() == false) {
-				printAlles(bord, human, ai);
 				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
-					
+					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
@@ -78,6 +77,7 @@ public class Spel {
 					}
 				} else {
 					ai.doeZet();
+					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
