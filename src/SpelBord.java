@@ -195,6 +195,23 @@ public class SpelBord {
 		}
 	}
 	
+	public boolean zetMuurschijf(int kolom, Mens mens){
+		if(mens.getAantalMuurschijven()==0){
+			System.out.println("Sorry, geen muurschijven meer.");
+			return false;
+		}
+		kolom=kolom-1;
+		Muurschijf x = new Muurschijf();
+		if((this.kolomIsOnField(kolom))&&(this.isJuisteZet(kolom))){
+			int rij = this.firstEmptyRow(kolom);
+			this.array[rij][kolom]=x;
+			mens.setAantalMuurschijven(mens.getAantalMuurschijven()-1);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	/**
 	 * plaatst een aambeeld in een kolom
 	 * @param kolom
@@ -251,7 +268,7 @@ public class SpelBord {
 	 * @param speler1
 	 * @param speler2
 	 */
-	public void printNamenEnAambeelden(Speler speler1, Speler speler2) {
+	public void printNamenEnAambeelden(Mens speler1, Speler speler2) {
 		System.out
 				.println("----------------------------------------------------------");
 		String word;
@@ -264,9 +281,15 @@ public class SpelBord {
 		} else {
 			word = "aambeelden";
 		}
+		String muurschijfString;
+		if(speler1.getAantalMuurschijven()!=0){
+			 muurschijfString = ", 1 muurschijf resterend";
+		}else{
+			 muurschijfString = "";
+		}
 		System.out.println(speler1.getNaam() + " ("
 				+ speler1.getSymbol().toString() + ") ["
-				+ speler1.getAantalAambeelden() + " " + word + " resterend]. Score: " + speler1.getScore());
+				+ speler1.getAantalAambeelden() + " " + word + " resterend"+muurschijfString+"]. Score: " + speler1.getScore());
 
 		// print voor speler 2
 		if (speler2.getAantalAambeelden() == 1) {
@@ -532,6 +555,45 @@ public class SpelBord {
 		}
 	}
 
+	public void checkMuurschijf(Mens mens) {
+		int counter=0;
+		int rij = 0;
+		int kolom = 0;
+		for (int i = 0; i < AANTAL_RIJEN; i++) {
+			for (int x = 0; x < AANTAL_KOLOMMEN; x++) {
+				if(array[i][x].isMuurschijf()){
+					System.out.println("*********************** muurschijf gevonden");
+					System.out.println("rij "+i+", kolom "+x);
+					rij = i;
+					kolom=x;
+					for(int n=1;n<=mens.getnMuurschijf();n++){
+						System.out.println("nMuurschijf: "+mens.getnMuurschijf());
+						System.out.println("n: "+n);
+						if(this.rijIsOnField(rij-n)){
+							if(!this.array[rij-n][kolom].isLeeg()){
+								System.out.println("rij "+(rij-n)+", kolom "+kolom+" is niet leeg.");
+								counter++;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(counter==mens.getnMuurschijf()){
+			Leeg lege = new Leeg();
+			int bovensteRij = rij-1;
+			this.array[rij][kolom]=this.array[bovensteRij][kolom];
+			for(int n=1;n<=mens.getnMuurschijf();n++){
+				if(this.rijIsOnField(rij-n-1)){
+					this.array[rij-n][kolom]=this.array[rij-n-1][kolom];
+				}
+				
+			}
+			this.array[rij-mens.getnMuurschijf()][kolom]=lege;
+		}
+	}
+	
 	/**
 	 * geeft aantal kolommen terug
 	 * 

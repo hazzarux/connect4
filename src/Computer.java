@@ -71,7 +71,6 @@ public class Computer extends Speler {
 			System.out.println("Computer koos om een aambeeld te zetten op kolom "+hoogstePuntenMove.getKolom());
 			this.bord.zetAambeeld(hoogstePuntenMove.getKolom(), this.getxAambeeld(), this);
 		}else{
-			//System.out.println("Computer doet een normale zet.");
 			this.doeZetNormaal();
 		}
 		

@@ -50,4 +50,13 @@ public class Schijf {
 		}
 	}
 	
+	public boolean isMuurschijf(){
+		Muurschijf x = new Muurschijf();
+		if(this.getCharacter().equals(x.getCharacter())){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }

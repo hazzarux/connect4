@@ -26,7 +26,8 @@ public class Spel {
 		System.out.println("----------");
 		System.out.println("De menselijke speler zet rondjes (O).");
 		System.out.println("De computerspeler zet kruisjes (X).");
-		System.out.println("Om een aambeeld (#) te gebruiken schrijft u 'a...' (zonder apostrofe) en waar ... het kolomnummer is.");
+		System.out.println("Om een aambeeld (#) te plaatsen, schrijft u 'a...' (zonder apostrofe) en waar ... het kolomnummer is.");
+		System.out.println("Om een muurschijf (%) te plaatsen, schrijft u 'm...' (zonder apostrofe) en waar ... het kolomnummer is.");
 		System.out.println("========================================================");
 
 		// grootte van het spelbord bepalen
@@ -47,9 +48,12 @@ public class Spel {
 		int aantalAambeelden = s.nextInt();
 		
 		//waarde voor x (van een aambeeld bepalen)
-		System.out.println("Hoeveel schijven moet een aambeeld verwijderen?");
+		System.out.println("Hoeveel schijven moet een aambeeld (#) verwijderen?");
 		int xAambeeld = s.nextInt();
 		
+		//waarde n voor muurschijf vragen
+		System.out.println("Wat is de n-waarde voor een muurschijf (%) ?");
+		int nMuurschijf = s.nextInt();
 		
 		// naam vragen
 		System.out.println("Wat is uw naam?");
@@ -59,10 +63,8 @@ public class Spel {
 		SpelBord bord = new SpelBord(grootteSpelBord);
 
 		// spelers genereren (computerspeler met bepaalde moeilijkheidsgraad)
-		Mens human = new Mens(aantalAambeelden, bord, naam, xAambeeld);
+		Mens human = new Mens(aantalAambeelden, bord, naam, xAambeeld, nMuurschijf);
 		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord, xAambeeld);
-
-		
 		
 		// main functie
 		do {
@@ -74,6 +76,7 @@ public class Spel {
 			while (bord.isGameOver() == false) {
 				if (aanDeBeurt == 1) {
 					human.vraagVoorZet();
+					bord.checkMuurschijf(human);
 					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
@@ -89,6 +92,7 @@ public class Spel {
 					}
 				} else {
 					ai.doeZet();
+					bord.checkMuurschijf(human);
 					printAlles(bord, human, ai);
 					if(bord.check4()!=null){
 						Schijf x = bord.check4();
@@ -166,7 +170,7 @@ public class Spel {
 	 * @param speler1
 	 * @param speler2
 	 */
-	public static void printAlles(SpelBord bord, Speler speler1, Speler speler2) {
+	public static void printAlles(SpelBord bord, Mens speler1, Speler speler2) {
 		bord.printSpelbord();
 		bord.printNamenEnAambeelden(speler1, speler2);
 	}
