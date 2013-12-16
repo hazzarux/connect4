@@ -24,8 +24,8 @@ public class Spel {
 		System.out.println("========================================================");
 		System.out.println("Tutorial:");
 		System.out.println("----------");
-		System.out.println("De menselijke speler zet rondjes.");
-		System.out.println("De computerspeler zet kruisjes.");
+		System.out.println("De menselijke speler zet rondjes (O).");
+		System.out.println("De computerspeler zet kruisjes (X).");
 		System.out.println("Om een aambeeld (#) te gebruiken schrijft u 'a...' (zonder apostrofe) en waar ... het kolomnummer is.");
 		System.out.println("========================================================");
 
