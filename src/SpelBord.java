@@ -584,16 +584,18 @@ public class SpelBord {
 		for (int i = 0; i < AANTAL_RIJEN; i++) {
 			for (int x = 0; x < AANTAL_KOLOMMEN; x++) {
 				if (array[i][x].isMuurschijf()) {
-					//System.out.println("*********************** muurschijf gevonden");
-					//System.out.println("rij " + i + ", kolom " + x);
+					// System.out.println("*********************** muurschijf gevonden");
+					// System.out.println("rij " + i + ", kolom " + x);
 					rij = i;
 					kolom = x;
 					for (int n = 1; n <= mens.getnMuurschijf(); n++) {
-						//System.out.println("nMuurschijf: "+ mens.getnMuurschijf());
-						//System.out.println("n: " + n);
+						// System.out.println("nMuurschijf: "+
+						// mens.getnMuurschijf());
+						// System.out.println("n: " + n);
 						if (this.rijIsOnField(rij - n)) {
 							if (!this.array[rij - n][kolom].isLeeg()) {
-								//System.out.println("rij " + (rij - n)+ ", kolom " + kolom+ " is niet leeg.");
+								// System.out.println("rij " + (rij - n)+
+								// ", kolom " + kolom+ " is niet leeg.");
 								counter++;
 							}
 						}
