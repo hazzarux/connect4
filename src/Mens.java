@@ -39,18 +39,21 @@ public class Mens extends Speler {
 	public void vraagVoorZet() {
 		boolean succesvol = false;
 		do {
-			System.out.println("In welke kolom wilt u een schijf plaatsen? (1 - "+this.bord.getAantalKolommen()+")");
+			System.out
+					.println("In welke kolom wilt u een schijf plaatsen? (1 - "
+							+ this.bord.getAantalKolommen() + ")");
 			String kolom = s.next();
-			kolom=kolom.toLowerCase();
-			if(kolom.contains("a")){
+			kolom = kolom.toLowerCase();
+			if (kolom.contains("a")) {
 				String kolomNr = kolom.split("a")[1];
 				int kolomInt = Integer.parseInt(kolomNr);
-				succesvol=this.bord.zetAambeeld(kolomInt,super.getxAambeeld(),this);
-			}else if(kolom.contains("m")){
+				succesvol = this.bord.zetAambeeld(kolomInt,
+						super.getxAambeeld(), this);
+			} else if (kolom.contains("m")) {
 				String kolomNr = kolom.split("m")[1];
 				int kolomInt = Integer.parseInt(kolomNr);
 				succesvol = this.bord.zetMuurschijf(kolomInt, this);
-			}else{
+			} else {
 				int kolomInt = Integer.parseInt(kolom);
 				succesvol = this.bord.zetSchijf(kolomInt, this.symbool);
 			}

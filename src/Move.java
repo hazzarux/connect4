@@ -1,4 +1,3 @@
-
 public class Move {
 	/**
 	 * klasse move voor elke move dat een computerspeler kan doen!
@@ -6,11 +5,11 @@ public class Move {
 	private int punten;
 	private String methode;
 	private int kolom;
-	
-	public Move(String methode){
-		this.methode=methode;
+
+	public Move(String methode) {
+		this.methode = methode;
 	}
-	
+
 	public int getPunten() {
 		return punten;
 	}
@@ -34,5 +33,5 @@ public class Move {
 	public void setKolom(int kolom) {
 		this.kolom = kolom;
 	}
-	
+
 }

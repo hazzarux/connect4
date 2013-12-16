@@ -8,7 +8,7 @@ public class Schijf {
 	public String getCharacter() {
 		return character;
 	}
-	
+
 	public void setCharacter(String character) {
 		this.character = character;
 	}
@@ -25,38 +25,40 @@ public class Schijf {
 			return false;
 		}
 	}
+
 	/**
 	 * 
 	 * @return if schijf is computer (kruisje)
 	 */
-	public boolean isComputer(){
+	public boolean isComputer() {
 		Kruis x = new Kruis();
-		if(this.getCharacter().equals(x.getCharacter())){
+		if (this.getCharacter().equals(x.getCharacter())) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
+
 	/**
 	 * 
 	 * @return if schijf is human schijf (rondje)
 	 */
-	public boolean isHuman(){
+	public boolean isHuman() {
 		Rondje x = new Rondje();
-		if(this.getCharacter().equals(x.getCharacter())){
+		if (this.getCharacter().equals(x.getCharacter())) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public boolean isMuurschijf(){
+
+	public boolean isMuurschijf() {
 		Muurschijf x = new Muurschijf();
-		if(this.getCharacter().equals(x.getCharacter())){
+		if (this.getCharacter().equals(x.getCharacter())) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
+
 }

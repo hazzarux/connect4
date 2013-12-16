@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Spel {
 	static Scanner s = new Scanner(System.in);
-	static int aanDeBeurt=1;
+	static int aanDeBeurt = 1;
 
 	public static void main(String[] args) {
 		boolean playAnotherGame = false;
 
 		// naam
 		System.out.println("F. Yigit Ozkan, r0456142");
-		
+
 		// "Vier op een rij" printen
 		String welcomeMessage = "__      ___                                                  _ _ \n"
 				+ "\\ \\    / (_)                                                (_|_)\n"
@@ -21,14 +21,18 @@ public class Spel {
 				+ "                             |_|                            |__/ ";
 		System.out.println(welcomeMessage);
 		// tutorial
-		System.out.println("========================================================");
+		System.out
+				.println("========================================================");
 		System.out.println("Tutorial:");
 		System.out.println("----------");
 		System.out.println("De menselijke speler zet rondjes (O).");
 		System.out.println("De computerspeler zet kruisjes (X).");
-		System.out.println("Om een aambeeld (#) te plaatsen, schrijft u 'a...' (zonder apostrofe) en waar ... het kolomnummer is.");
-		System.out.println("Om een muurschijf (%) te plaatsen, schrijft u 'm...' (zonder apostrofe) en waar ... het kolomnummer is.");
-		System.out.println("========================================================");
+		System.out
+				.println("Om een aambeeld (#) te plaatsen, schrijft u 'a...' (zonder apostrofe) en waar ... het kolomnummer is.");
+		System.out
+				.println("Om een muurschijf (%) te plaatsen, schrijft u 'm...' (zonder apostrofe) en waar ... het kolomnummer is.");
+		System.out
+				.println("========================================================");
 
 		// grootte van het spelbord bepalen
 		System.out
@@ -46,15 +50,16 @@ public class Spel {
 		System.out.println("Hoeveel aambeelden moet elke speler krijgen?");
 		System.out.println("(1 of 2)");
 		int aantalAambeelden = s.nextInt();
-		
-		//waarde voor x (van een aambeeld bepalen)
-		System.out.println("Hoeveel schijven moet een aambeeld (#) verwijderen?");
+
+		// waarde voor x (van een aambeeld bepalen)
+		System.out
+				.println("Hoeveel schijven moet een aambeeld (#) verwijderen?");
 		int xAambeeld = s.nextInt();
-		
-		//waarde n voor muurschijf vragen
+
+		// waarde n voor muurschijf vragen
 		System.out.println("Wat is de n-waarde voor een muurschijf (%) ?");
 		int nMuurschijf = s.nextInt();
-		
+
 		// naam vragen
 		System.out.println("Wat is uw naam?");
 		String naam = s.next();
@@ -63,9 +68,11 @@ public class Spel {
 		SpelBord bord = new SpelBord(grootteSpelBord);
 
 		// spelers genereren (computerspeler met bepaalde moeilijkheidsgraad)
-		Mens human = new Mens(aantalAambeelden, bord, naam, xAambeeld, nMuurschijf);
-		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord, xAambeeld);
-		
+		Mens human = new Mens(aantalAambeelden, bord, naam, xAambeeld,
+				nMuurschijf);
+		Computer ai = new Computer(moeilijkheidsgraad, aantalAambeelden, bord,
+				xAambeeld);
+
 		// main functie
 		do {
 			bord.generateSpelbord();
@@ -78,30 +85,32 @@ public class Spel {
 					human.vraagVoorZet();
 					bord.checkMuurschijf(human);
 					printAlles(bord, human, ai);
-					if(bord.check4()!=null){
+					if (bord.check4() != null) {
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
-					}else{
-						if(bord.checkVol()){
-							System.out.println("Het bord is vol. Het is gelijkspel. Niemand wint!");
+					} else {
+						if (bord.checkVol()) {
+							System.out
+									.println("Het bord is vol. Het is gelijkspel. Niemand wint!");
 							bord.setGameOver(true);
-						}else{
+						} else {
 							switchPlayer();
 						}
-						
+
 					}
 				} else {
 					ai.doeZet();
 					bord.checkMuurschijf(human);
 					printAlles(bord, human, ai);
-					if(bord.check4()!=null){
+					if (bord.check4() != null) {
 						Schijf x = bord.check4();
 						checkForWinner(x, human, ai, bord);
-					}else{
-						if(bord.checkVol()){
-							System.out.println("Het bord is vol. Het is gelijkspel. Niemand wint!");
+					} else {
+						if (bord.checkVol()) {
+							System.out
+									.println("Het bord is vol. Het is gelijkspel. Niemand wint!");
 							bord.setGameOver(true);
-						}else{
+						} else {
 							switchPlayer();
 						}
 					}
@@ -112,6 +121,7 @@ public class Spel {
 		} while (playAnotherGame == true);
 
 	}
+
 	/**
 	 * if human player is playing, switch to computer player
 	 */
@@ -125,6 +135,7 @@ public class Spel {
 
 	/**
 	 * prompt for "another game?"
+	 * 
 	 * @return true if player wants to play again
 	 */
 	public static boolean promptIfPlayerWantsToPlayAgain() {
@@ -134,38 +145,50 @@ public class Spel {
 
 		if (yesOrNo.equals("j")) {
 			return true;
-		} else if(yesOrNo.equals("n")) {
+		} else if (yesOrNo.equals("n")) {
 			return false;
-		}else{
+		} else {
 			System.out.println("Ongeldige input!");
 			return promptIfPlayerWantsToPlayAgain();
 		}
 
 	}
+
 	/**
 	 * checken of er een winnaar is (4 op een rij)
+	 * 
 	 * @param winnendeSchijf
 	 * @param speler1
 	 * @param speler2
 	 * @param bord
 	 */
-	public static void checkForWinner(Schijf winnendeSchijf, Speler speler1, Speler speler2, SpelBord bord){
-		if(winnendeSchijf.getCharacter().equals(speler1.getSymbol().toString())){
+	public static void checkForWinner(Schijf winnendeSchijf, Speler speler1,
+			Speler speler2, SpelBord bord) {
+		if (winnendeSchijf.getCharacter()
+				.equals(speler1.getSymbol().toString())) {
 			speler1.incrementScore();
-			System.out.println(speler1.getNaam()+" heeft gewonnen! Zijn/haar score is nu "+speler1.getScore()+"!");
+			System.out.println(speler1.getNaam()
+					+ " heeft gewonnen! Zijn/haar score is nu "
+					+ speler1.getScore() + "!");
 			bord.setGameOver(true);
-			
-		}else if(winnendeSchijf.getCharacter().equals(speler2.getSymbol().toString())){
+
+		} else if (winnendeSchijf.getCharacter().equals(
+				speler2.getSymbol().toString())) {
 			speler2.incrementScore();
-			System.out.println(speler2.getNaam()+" heeft gewonnen. Zijn score is nu "+speler2.getScore()+"!");
+			System.out.println(speler2.getNaam()
+					+ " heeft gewonnen. Zijn score is nu " + speler2.getScore()
+					+ "!");
 			bord.setGameOver(true);
-		}else{
+		} else {
 			System.out.println("error");
 			bord.setGameOver(true);
 		}
 	}
+
 	/**
-	 * spelbord printen + header + footer + namen van spelers (met score en aantal resterende aambeelden)
+	 * spelbord printen + header + footer + namen van spelers (met score en
+	 * aantal resterende aambeelden)
+	 * 
 	 * @param bord
 	 * @param speler1
 	 * @param speler2
